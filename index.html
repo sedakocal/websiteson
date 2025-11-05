@@ -653,16 +653,41 @@
             }
 
             .about-content {
-                grid-template-columns: 1fr !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 50px !important;
             }
 
+            /* Mobil: Önce kartlar (üstte), sonra bilgiler (altta) */
             .about-image-container {
-                height: 500px !important;
-                padding: 0px 15px !important;
+                position: relative !important;
+                height: 480px !important;
+                padding: 0 !important;
+                margin: -50px 0 60px 0 !important;
+                order: 1 !important;
+                z-index: 5 !important;
             }
 
             .about-info {
-                padding-left: 0 !important;
+                padding: 0 15px !important;
+                order: 2 !important;
+                margin-top: 0 !important;
+                position: relative;
+                z-index: 10 !important;
+                background: var(--bg-primary);
+                padding-top: 30px !important;
+            }
+
+            #cardStack {
+                height: 100% !important;
+                width: 100% !important;
+            }
+
+            .card-item {
+                max-width: 100% !important;
+                height: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
             }
 
             .timeline::before {
@@ -695,14 +720,51 @@
                 grid-template-columns: 1fr;
             }
 
-            /* Optimize canvas for mobile */
-            #starsCanvas, #milkyWayCanvas, #backgroundCanvas {
-                display: none;
+            /* Optimize canvas for mobile: enable a lightweight canvas stack instead of hiding entirely */
+            #backgroundCanvas, #starsCanvas, #milkyWayCanvas {
+                display: block !important;
+                width: 100% !important;
+                height: 100% !important;
+                position: absolute !important;
+                top: 0; left: 0;
+                z-index: 0 !important;
+                pointer-events: none !important;
+                opacity: 0.98 !important;
             }
 
+            /* fallback subtle star dots when canvas cannot run or is disabled */
             body {
-                background: radial-gradient(#100826, #060212);
+                background: radial-gradient(ellipse at bottom, #0b0d12 0%, #06060a 100%) !important;
             }
+
+            .hero {
+                background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.18) 100%) !important;
+            }
+
+            /* Mobile menü açık durumu */
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: rgba(10, 10, 15, 0.98);
+                border: 1px solid rgba(139, 92, 246, 0.3);
+                border-radius: 15px;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                z-index: 1001;
+            }
+
+            /* Show full images on mobile (no cropping) */
+            .card-item img {
+                object-fit: contain !important;
+                width: 100% !important;
+                height: 100% !important;
+                background: #0b0b0f;
+            }
+
         }
     </style>
 </head>
@@ -815,7 +877,7 @@
                         </div>
                         <div class="highlight-card">
                             <h3>👥 Liderlik</h3>
-                            <p>Endüstri Mühendisliği Kulübü Başkanı<br>IEEE WIE Society Başkanı</p>
+                            <p>Endüstri Mühendisliği Kulübü Başkanı<br>IEEE WIE Başkanı</p>
                         </div>
                     </div>
                 </div>
@@ -838,6 +900,10 @@
 
         // Kart pozisyonlarını güncelle: 0=aktif (ortada), 1=sağda, 2=solda (veya prev)
         function updateCards(dragOffset = 0) {
+            const isMobile = window.innerWidth <= 768;
+            const sideOffset = isMobile ? 35 : 60; // Mobilde daha az kayma
+            const sideRotation = isMobile ? 5 : 8; // Mobilde daha az rotasyon
+            
             cards.forEach((card) => {
                 const idx = parseInt(card.getAttribute('data-index'));
                 const isActive = idx === 0;
@@ -852,13 +918,13 @@
                     // Sağdaki kart
                     card.style.zIndex = '9';
                     card.style.opacity = '0.85';
-                    card.style.transform = 'scale(0.92) rotate(8deg) translateX(60px)';
+                    card.style.transform = `scale(0.92) rotate(${sideRotation}deg) translateX(${sideOffset}px)`;
                     card.style.cursor = 'default';
                 } else if (idx === totalCards - 1) {
                     // Soldaki kart (prev)
                     card.style.zIndex = '9';
                     card.style.opacity = '0.85';
-                    card.style.transform = 'scale(0.92) rotate(-8deg) translateX(-60px)';
+                    card.style.transform = `scale(0.92) rotate(-${sideRotation}deg) translateX(-${sideOffset}px)`;
                     card.style.cursor = 'default';
                 } else {
                     // Gizli kartlar
@@ -911,7 +977,9 @@
                 
                 activeCard.style.transition = 'all 0.5s ease-in-out';
                 
-                const threshold = 80; // Minimum kaydırma mesafesi
+                // Mobil için daha düşük threshold (dokunmatik ekranlarda daha kolay)
+                const isMobile = window.innerWidth <= 768;
+                const threshold = isMobile ? 50 : 80; // Minimum kaydırma mesafesi
                 if (Math.abs(currentX) > threshold) {
                     if (currentX > 0) {
                         // Sağa kaydırıldı → soldaki kart gelsin (prev)
@@ -953,7 +1021,7 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3>Endüstri Mühendisliği Kulübü</h3>
+                        <h3>İstanbul Gedik Üniversitesi<br>Endüstri Mühendisliği Kulübü</h3>
                         <p class="role">Kulüp Başkanı</p>
                         <p>
                             Eğitim programları, teknik geziler ve seminerler düzenleyerek öğrencilerin kariyer gelişimine öncülük ediyorum. Kulüp faaliyetlerini yöneterek sosyal ve akademik etkinlikler organize ediyorum.
@@ -1156,6 +1224,35 @@
     </footer>
 
     <script>
+    // Mobile Menu Toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+
+            // Menü linklerine tıklanınca menüyü kapat
+            const links = navLinks.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Dışarı tıklanınca menüyü kapat
+            document.addEventListener('click', function(event) {
+                if (!menuToggle.contains(event.target) && !navLinks.contains(event.target)) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        }
+    });
+    </script>
+
+    <script>
     // Animated Starry Background with Milky Way
     // To ensure we use native resolution of screen
     var dpr = window.devicePixelRatio || 1;
@@ -1172,18 +1269,20 @@
     const ctxMw = canvasMw.getContext('2d');
     ctxMw.scale(dpr,dpr); // to scale every drawing operations
 
-    // constants for the behavior of the model - Optimized for performance
-    const sNumber = 200;              // number of Stars (reduced from 600)
-    const sSize = .3;                 // minimum size of Star
-    const sSizeR = .6;                // randomness of the size of Stars
-    const sAlphaR = .5;               // randomness of alpha for stars
-    const sMaxHueProportion = .6;     // max proportion of displayed base hue
-    // Shooting stars parameters
-    const shootingStarDensity = 0.005; // reduced from 0.01
-    const shootingStarBaseXspeed = 30;
-    const shootingStarBaseYspeed = 15;
-    const shootingStarBaseLength = 8;
-    const shootingStarBaseLifespan = 60;
+    // constants for the behavior of the model - adapt to device size for performance
+    const isMobileView = (window.innerWidth || document.documentElement.clientWidth) <= 768;
+    // star counts: lower on mobile to preserve battery & perf
+    const sNumber = isMobileView ? 80 : 200;              // number of Stars
+    const sSize = isMobileView ? 0.22 : 0.3;              // minimum size of Star
+    const sSizeR = isMobileView ? 0.45 : 0.6;             // randomness of the size of Stars
+    const sAlphaR = isMobileView ? 0.35 : 0.5;            // randomness of alpha for stars
+    const sMaxHueProportion = .6;                         // max proportion of displayed base hue
+    // Shooting stars parameters (lighter on mobile)
+    const shootingStarDensity = isMobileView ? 0.0025 : 0.005;
+    const shootingStarBaseXspeed = isMobileView ? 18 : 30;
+    const shootingStarBaseYspeed = isMobileView ? 8 : 15;
+    const shootingStarBaseLength = isMobileView ? 5 : 8;
+    const shootingStarBaseLifespan = isMobileView ? 40 : 60;
     // Shooting star colors
     const shootingStarsColors = [
       "#a1ffba", // greenish
@@ -1192,18 +1291,18 @@
       "#ffa1a1"  // redish
     ];
     // milky way constants - Optimized
-    const mwStarCount = 30000;      // amount of static stars (reduced from 100000)
-    const mwRandomStarProp = .2;    // proportion of stars completely random in the milky way
-    const mwClusterCount = 150;     // amount of clusters (reduced from 300)
-    const mwClusterStarCount = 800; // amount of stars per cluster (reduced from 1500)
-    const mwClusterSize = 120;      // minimum size of a cluster
-    const mwClusterSizeR = 80;      // randomness of the size of a cluster
-    const mwClusterLayers = 10;     // amount of layers per cluster to draw
-    const mwAngle = 0.6;            // to incline the milky way (0 is horizontal, tend to infinite to get vertical)
-    const mwHueMin = 150;           // min hue for a cluster (150 is green)
-    const mwHueMax = 300;           // max hue for a cluster (300 is pink)
-    const mwWhiteProportionMin = 50;// minimum base percentage of white in cluster hue
-    const mwWhiteProportionMax = 65;// maximum base percentage of white in cluster hue
+    const mwStarCount = isMobileView ? 8000 : 30000;      // amount of static stars
+    const mwRandomStarProp = .2;                          // proportion of stars completely random in the milky way
+    const mwClusterCount = isMobileView ? 40 : 150;       // amount of clusters
+    const mwClusterStarCount = isMobileView ? 150 : 800;  // amount of stars per cluster
+    const mwClusterSize = isMobileView ? 60 : 120;        // minimum size of a cluster
+    const mwClusterSizeR = isMobileView ? 40 : 80;        // randomness of the size of a cluster
+    const mwClusterLayers = isMobileView ? 6 : 10;        // amount of layers per cluster to draw
+    const mwAngle = 0.6;                                  // to incline the milky way
+    const mwHueMin = 150;                                 // min hue for a cluster
+    const mwHueMax = 300;                                 // max hue for a cluster
+    const mwWhiteProportionMin = 50;                      // minimum base percentage of white in cluster hue
+    const mwWhiteProportionMax = 65;                      // maximum base percentage of white in cluster hue
 
     // array containing random numbers
     let randomArray;
