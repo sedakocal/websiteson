@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sedanur Koçal - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #13131a;
+            --bg-card: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --accent: #8b5cf6;
+            --accent-hover: #a78bfa;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 50px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+        }
+
+        /* .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        } */
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            border: 5px solid var(--accent);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
+            animation: fadeInUp 1s ease-out;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            position: relative;
+            transition: transform 0.25s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .spark__container {
+            position: absolute;
+            inset: -3px;
+            border-radius: 9999px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .spark {
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            rotate: 0deg;
+            overflow: hidden;
+            mask: linear-gradient(white, transparent 50%);
+            animation: flip 6s infinite steps(2, end);
+            pointer-events: none;
+        }
+
+        @keyframes flip {
+            to {
+                rotate: 360deg;
+            }
+        }
+
+        .spark:before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            aspect-ratio: 1;
+            inset: 0 auto auto 50%;
+            translate: -50% -15%;
+            rotate: 0;
+            transform: rotate(-90deg);
+            opacity: 1;
+            transition: opacity 0.25s;
+            animation: rotate 3s linear infinite both;
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(90deg);
+            }
+        }
+
+        .btn-primary .spark:before {
+            background: conic-gradient(from 0deg, transparent 0 340deg, #a78bfa 360deg);
+        }
+
+        .btn-secondary .spark:before {
+            background: conic-gradient(from 0deg, transparent 0 340deg, #667eea 360deg);
+        }
+
+        .backdrop {
+            display: none;
+        }
+
+        .text {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .about-image-container {
+            position: sticky;
+            top: 120px;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 20px;
+            border: 3px solid var(--accent);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
+        }
+
+        .about-info {
+            flex: 1;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .about-highlights {
+            display: grid;
+            gap: 20px;
+        }
+
+        .highlight-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            transition: all 0.3s;
+        }
+
+        .highlight-card:hover {
+            transform: translateX(10px);
+            border-color: var(--accent);
+        }
+
+        .highlight-card h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--accent);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: 50%;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: 50%;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+
+        .timeline-content h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .timeline-content .role {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        .skill-category h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            color: var(--text-secondary);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover .social-icon {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .social-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover .social-label {
+            color: var(--accent);
+        }
+
+        .email-button {
+            margin-top: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent);
+            transition: all 0.3s;
+        }
+
+        /* Canvas Background Styles */
+        #backgroundCanvas {
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            overflow: hidden;
+            z-index: 1;
+            background: radial-gradient(#100826, #060212);
+            pointer-events: none;
+        }
+        
+        #starsCanvas {
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            overflow: hidden;
+            z-index: 2;
+            background-color: transparent;
+            pointer-events: none;
+        }
+        
+        #milkyWayCanvas {
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            object-fit: contain;
+            overflow: hidden;
+            z-index: 1;
+            filter: blur(0px);
+            pointer-events: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr !important;
+            }
+
+            .about-image-container {
+                height: 500px !important;
+                padding: 0px 15px !important;
+            }
+
+            .about-info {
+                padding-left: 0 !important;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding: 0 0 0 40px;
+                text-align: left;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Optimize canvas for mobile */
+            #starsCanvas, #milkyWayCanvas, #backgroundCanvas {
+                display: none;
+            }
+
+            body {
+                background: radial-gradient(#100826, #060212);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Canvases -->
+    <canvas id="backgroundCanvas"></canvas>
+    <canvas id="starsCanvas"></canvas>
+    <canvas id="milkyWayCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">SK</div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Ana Sayfa</a></li>
+                <li><a href="#about">Hakkımda</a></li>
+                <li><a href="#experience">Deneyim</a></li>
+                <li><a href="#projects">Projeler</a></li>
+                <li><a href="#skills">Beceriler</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img src="https://i.imgur.com/YVSURYM.png" alt="Sedanur Koçal" class="profile-image">
+            <h1>Sedanur Koçal</h1>
+            <p class="subtitle">Endüstri Mühendisliği Öğrencisi & Lider</p>
+            <p class="description">
+                Per aspera ad astra
+            </p>
+            <div class="cta-buttons">
+                <a href="#about" class="btn btn-primary">
+                    Keşfet
+                    <span class="spark__container">
+                        <span class="spark"></span>
+                    </span>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    İletişime Geç
+                    <span class="spark__container">
+                        <span class="spark"></span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="padding-top: 10px;">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 20px;">Hakkımda</h2>
+            <!-- İki sütunlu yapı: sol kart destesi, sağ metin -->
+            <div class="about-content" style="display: grid; grid-template-columns: 550px 1fr; gap: 40px; align-items: start;">
+                
+                <!-- Sol: Kart Destesi (Card Stack Slider) -->
+                <div class="about-image-container" style="position: relative; height: 750px; width: 100%; perspective: 1000px; padding: 0px 30px; display: flex; align-items: flex-start; margin-top: -30px;">
+                    <div id="cardStack" class="relative w-full h-full" style="touch-action: pan-y;">
+                        <!-- Kart 1 -->
+                        <div class="card-item absolute rounded-3xl shadow-lg overflow-hidden transition-all duration-500 ease-in-out cursor-grab active:cursor-grabbing"
+                             data-index="0"
+                             style="z-index: 10; opacity: 1; transform: scale(1) rotate(0deg) translateX(0px); top: 0; left: 0; right: 0; bottom: 0; border: 3px solid #8b5cf6;">
+                            <img src="https://i.imgur.com/c71Z9iM.jpeg" alt="Fotoğraf 1" class="pointer-events-none" style="width: 100%; height: 100%; object-fit: cover; object-position: center; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+                        </div>
+                        <!-- Kart 2 -->
+                        <div class="card-item absolute rounded-3xl shadow-lg overflow-hidden transition-all duration-500 ease-in-out"
+                             data-index="1"
+                             style="z-index: 9; opacity: 0.85; transform: scale(0.92) rotate(8deg) translateX(60px); top: 0; left: 0; right: 0; bottom: 0; border: 3px solid #8b5cf6;">
+                            <img src="https://i.imgur.com/Fkdtt3J.jpeg" alt="Fotoğraf 2" class="pointer-events-none" style="width: 100%; height: 100%; object-fit: cover; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+                        </div>
+                        <!-- Kart 3 -->
+                         <!-- Bu fotoğrafı çok beğendim - Mehmet Efe Aytaş -->
+                        <div class="card-item absolute rounded-3xl shadow-lg overflow-hidden transition-all duration-500 ease-in-out"
+                             data-index="2"
+                             style="z-index: 9; opacity: 0.85; transform: scale(0.92) rotate(-8deg) translateX(-60px); top: 0; left: 0; right: 0; bottom: 0; border: 3px solid #8b5cf6;">
+                            <img src="https://i.imgur.com/IHNurPc.jpeg" alt="Fotoğraf 3" class="pointer-events-none" style="width: 100%; height: 100%; object-fit: cover; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sağ: Metin İçeriği -->
+                 <!-- Başarılarınızın devamını dilerim Sedanur Hanım - Mehmet Efe Aytaş -->
+                <div class="about-info" style="padding-left: 30px;">
+                    <div class="about-text">
+                        <p>
+                            Endüstri Mühendisliği öğrencisi ve aktif bir lider olarak, teorik bilgiyi pratik deneyime dönüştürme misyonuyla hareket ediyorum. Okulumun Endüstri Mühendisliği Kulübü Başkanlığı görevinde, öğrencilerin kariyer gelişimine öncülük etmekteyim.
+                        </p>
+                        <p>
+                            Teknik odak noktam, uzay ve havacılık teknolojileri, roket tasarımı ve aviyonik sistemlerdir. Aktif olarak Arrow Roket Takımı bünyesinde bu yenilikçi alanlarda aktif çalışmalar yürütmekteyim.
+                        </p>
+                        <p>
+                            Liderlik ve takım çalışmasında aktif rol almanın yanı sıra, sanat ve müzikle olan derin ilgim yaratıcı düşünce ve estetik bakış açımı beslemektedir. Tiyatro sahne deneyimlerim ve müzik yeteneğim, teknik disiplinimi tamamlayan çok yönlü bir profil oluşturmaktadır.
+                        </p>
+                    </div>
+                    <div class="about-highlights">
+                        <div class="highlight-card">
+                            <h3>🎓 Eğitim</h3>
+                            <p>İstanbul Gedik Üniversitesi<br>Endüstri Mühendisliği<br>%100 Burslu</p>
+                        </div>
+                        <div class="highlight-card">
+                            <h3>🚀 Uzay & Havacılık</h3>
+                            <p>Arrow Roket Takımı<br>Aviyonik Sistemler & Yer İstasyonu</p>
+                        </div>
+                        <div class="highlight-card">
+                            <h3>👥 Liderlik</h3>
+                            <p>Endüstri Mühendisliği Kulübü Başkanı<br>IEEE WIE Society Başkanı</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    (function() {
+        const stack = document.getElementById('cardStack');
+        if (!stack) return;
+        const cards = Array.from(stack.querySelectorAll('.card-item'));
+        if (!cards.length) return;
+
+        const totalCards = cards.length;
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        let activeCard = null;
+
+        // Kart pozisyonlarını güncelle: 0=aktif (ortada), 1=sağda, 2=solda (veya prev)
+        function updateCards(dragOffset = 0) {
+            cards.forEach((card) => {
+                const idx = parseInt(card.getAttribute('data-index'));
+                const isActive = idx === 0;
+                
+                if (isActive) {
+                    // Aktif kart (ortada, sürüklenebilir)
+                    card.style.zIndex = '10';
+                    card.style.opacity = '1';
+                    card.style.transform = `scale(1) rotate(${dragOffset * 0.05}deg) translateX(${dragOffset}px)`;
+                    card.style.cursor = isDragging ? 'grabbing' : 'grab';
+                } else if (idx === 1) {
+                    // Sağdaki kart
+                    card.style.zIndex = '9';
+                    card.style.opacity = '0.85';
+                    card.style.transform = 'scale(0.92) rotate(8deg) translateX(60px)';
+                    card.style.cursor = 'default';
+                } else if (idx === totalCards - 1) {
+                    // Soldaki kart (prev)
+                    card.style.zIndex = '9';
+                    card.style.opacity = '0.85';
+                    card.style.transform = 'scale(0.92) rotate(-8deg) translateX(-60px)';
+                    card.style.cursor = 'default';
+                } else {
+                    // Gizli kartlar
+                    card.style.zIndex = '7';
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.7) rotate(0deg) translateX(0px)';
+                    card.style.cursor = 'default';
+                }
+            });
+        }
+
+        // Kartı değiştir (direction: 1=sağa kaydır/next, -1=sola kaydır/prev)
+        function changeCard(direction) {
+            cards.forEach(c => {
+                let idx = parseInt(c.getAttribute('data-index'));
+                if (direction === 1) {
+                    // Sağa kaydırma: aktif kart sola gider, sağdaki kart aktif olur
+                    idx = (idx - 1 + totalCards) % totalCards;
+                } else {
+                    // Sola kaydırma: aktif kart sağa gider, soldaki kart aktif olur
+                    idx = (idx + 1) % totalCards;
+                }
+                c.setAttribute('data-index', idx);
+            });
+            updateCards();
+        }
+
+        // Pointer/Touch olayları
+        cards.forEach(card => {
+            card.addEventListener('pointerdown', (e) => {
+                const idx = parseInt(card.getAttribute('data-index'));
+                if (idx !== 0) return; // Sadece aktif kartı sürükle
+                
+                isDragging = true;
+                activeCard = card;
+                startX = e.clientX;
+                currentX = 0;
+                card.style.transition = 'none';
+                card.setPointerCapture(e.pointerId);
+            });
+
+            card.addEventListener('pointermove', (e) => {
+                if (!isDragging || !activeCard) return;
+                currentX = e.clientX - startX;
+                updateCards(currentX);
+            });
+
+            card.addEventListener('pointerup', (e) => {
+                if (!isDragging || !activeCard) return;
+                
+                activeCard.style.transition = 'all 0.5s ease-in-out';
+                
+                const threshold = 80; // Minimum kaydırma mesafesi
+                if (Math.abs(currentX) > threshold) {
+                    if (currentX > 0) {
+                        // Sağa kaydırıldı → soldaki kart gelsin (prev)
+                        changeCard(-1);
+                    } else {
+                        // Sola kaydırıldı → sağdaki kart gelsin (next)
+                        changeCard(1);
+                    }
+                } else {
+                    // Yeterli kaydırma yok, geri dön
+                    updateCards(0);
+                }
+                
+                isDragging = false;
+                activeCard.releasePointerCapture(e.pointerId);
+                activeCard = null;
+                currentX = 0;
+            });
+
+            card.addEventListener('pointercancel', (e) => {
+                if (isDragging && activeCard) {
+                    activeCard.style.transition = 'all 0.5s ease-in-out';
+                    updateCards(0);
+                    isDragging = false;
+                    activeCard = null;
+                }
+            });
+        });
+
+        // İlk render
+        updateCards();
+    })();
+    </script>
+
+    <!-- Experience Section -->
+    <section id="experience" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">Deneyim & Liderlik</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Endüstri Mühendisliği Kulübü</h3>
+                        <p class="role">Kulüp Başkanı</p>
+                        <p>
+                            Eğitim programları, teknik geziler ve seminerler düzenleyerek öğrencilerin kariyer gelişimine öncülük ediyorum. Kulüp faaliyetlerini yöneterek sosyal ve akademik etkinlikler organize ediyorum.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>IEEE Gedik - Women in Engineering Society</h3>
+                        <p class="role">Bölüm Başkanı</p>
+                        <p>
+                            Kadın mühendis adaylarını destekleyen sosyal ve teknik etkinlikler organize ediyorum. Mühendislik alanında kadın temsili ve farkındalık çalışmaları yürütüyorum.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Arrow Roket Takımı</h3>
+                        <p class="role">Elektronik & Yer İstasyonu Sorumlusu</p>
+                        <p>
+                            Görev yükü ayrıştırması, elektronik veri aktarımı, kart sistemleri ve istasyon bağlantıları üzerine çalışmalar yürütüyorum. Aviyonik sistemler ve yer istasyonu iletişimi konularında aktif rol alıyorum.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>İstanbul Maratonu</h3>
+                        <p class="role">Gönüllü Görevli</p>
+                        <p>
+                            Katılımcı yönlendirme, organizasyon destek ve koordinasyon görevlerinde bulundum. Büyük ölçekli etkinlik yönetimi deneyimi kazandım.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projeler & Yarışmalar</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">🔭
+</div>
+                    <h3>NASA Space Apps Challenge</h3>
+                    <p>
+                        Çocuklar için bilimsel farkındalık oyunu tasarımı. Proje geliştirme ve rapor oluşturma görevlerini üstlendim.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">NASA</span>
+                        <span class="tag">Oyun Tasarımı</span>
+                        <span class="tag">Liderlik</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">⚛️</div>
+                    <h3>CERN & DESY Beamline for Schools</h3>
+                    <p>
+                        Parçacık fiziği projesi. Araştırma, raporlama ve video düzenleme süreçlerinde aktif görev aldım.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">CERN</span>
+                        <span class="tag">Fizik</span>
+                        <span class="tag">Araştırma</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">🚀</div>
+                    <h3>Arrow Roket Takımı - TEKNOFEST 2025</h3>
+                    <p>
+                        Aviyonik sistem tasarımı ve implementasyonu üzerine çalıştım. Haberleşme, veri aktarımı ve yön kontrol sistemlerinde teknik sorumluluk aldım. 
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">TEKNOFEST</span>
+                        <span class="tag">Aviyonik</span>
+                        <span class="tag">Roket</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">💧</div>
+                    <h3>TEKNOFEST - Su Kıtlığı Projesi</h3>
+                    <p>
+                        Sürdürülebilir çözüm geliştirme, araştırma ve test süreçlerinde yer aldım. İnovatif yaklaşımlarla su tasarrufu çözümleri geliştirdim.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">TEKNOFEST</span>
+                        <span class="tag">Sürdürülebilirlik</span>
+                        <span class="tag">İnovasyon</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">✍️</div>
+                    <h3>Üsküdar Üniversitesi - Bilim ve Fikir Festivali</h3>
+                    <p>
+                        Yaratıcı yazarlık projesi sunumu gerçekleştirdim. Bilim ve sanata interdisipliner yaklaşım gösterdim.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Yaratıcı Yazarlık</span>
+                        <span class="tag">Sunum</span>
+                        <span class="tag">Festival</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">Beceriler & Yetkinlikler</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Liderlik & Yönetim</h3>
+                    <ul class="skill-list">
+                        <li>Takım Liderliği</li>
+                        <li>Proje Yönetimi</li>
+                        <li>Kriz Yönetimi</li>
+                        <li>Etkinlik Organizasyonu</li>
+                        <li>İletişim Becerileri</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Teknik Beceriler</h3>
+                    <ul class="skill-list">
+                        <li>Elektronik Devre Bilgisi</li>
+                        <li>Arduino</li>
+                        <li>MS Office</li>
+                        <li>Canva</li>
+                        <li>Video & Metin Kurgusu</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>İlgi Alanları</h3>
+                    <ul class="skill-list">
+                        <li>Tiyatro</li>
+                        <li>Müzik & Enstrüman</li>
+                        <li>Sanat</li>
+                        <li>Uzay Teknolojileri</li>
+                        <li>Havacılık</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">İletişim</h2>
+            <div class="contact-content">
+                <p>Benimle iletişime geçmek veya takip etmek isterseniz aşağıdaki kanallardan bana ulaşabilirsiniz!</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/sedanur-kocal/" target="_blank" class="social-link" title="LinkedIn">
+                        <div class="social-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </div>
+                        <span class="social-label">LinkedIn</span>
+                    </a>
+
+                    <a href="https://www.instagram.com/sedaakocall/" target="_blank" class="social-link" title="Instagram">
+                        <div class="social-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.225-.149-4.771-1.694-4.919-4.919-.058-1.266-.07-1.645-.07-4.849 0-3.204.012-3.584.07-4.85.149-3.227 1.694-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.265-.059-1.644-.073-4.849-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162 0 3.403 2.759 6.162 6.162 6.162 3.403 0 6.162-2.759 6.162-6.162 0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.441s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.441-1.441-1.441z"/>
+                            </svg>
+                        </div>
+                        <span class="social-label">Instagram</span>
+                    </a>
+
+                    <a href="mailto:sedanurk@igedik.edu.tr" class="social-link" title="E-mail">
+                        <div class="social-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                        </div>
+                        <span class="social-label">E-Mail</span>
+                    </a>
+
+                    <a href="https://open.spotify.com/user/cia337box8xwakw5qiuryg5b1" target="_blank" class="social-link" title="Spotify">
+                        <div class="social-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm5.521 17.34a.75.75 0 0 1-1.021.24c-2.82-1.74-6.36-2.101-10.561-1.141a.75.75 0 1 1-.322-1.466c4.56-1.271 9.799-.642 13.48 1.409a.75.75 0 0 1 .424.958zm1.44-3.3a.75.75 0 0 1-1.262.3c-3.239-1.98-8.159-2.58-12.041-1.409a.75.75 0 1 1-.422-1.458c4.5-1.271 9.799-.642 13.48 1.409a.75.75 0 0 1 .245 1.158zm.24-3.36a.75.75 0 0 1-1.022.24c-3.73-2.25-9.39-2.461-12.961-1.35a.75.75 0 0 1-.451-1.43c4.02-1.27 10.14-1.02 14.28 1.46a.75.75 0 0 1 .154 1.08z"/>
+                            </svg>
+                        </div>
+                        <span class="social-label">Spotify</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+     <!-- Mehmet Efe Aytaş'tan, sevgili Sedanur Koçal'a  -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sedanur Koçal. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+    // Animated Starry Background with Milky Way
+    // To ensure we use native resolution of screen
+    var dpr = window.devicePixelRatio || 1;
+
+    // getting canvases with native resolution
+    const canvas = document.getElementById("starsCanvas");
+    canvas.width = window.innerWidth*dpr;
+    canvas.height = window.innerHeight*dpr;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr,dpr); // to scale every drawing operations
+    const canvasMw = document.getElementById("milkyWayCanvas");
+    canvasMw.width = window.innerWidth*dpr;
+    canvasMw.height = window.innerHeight*dpr;
+    const ctxMw = canvasMw.getContext('2d');
+    ctxMw.scale(dpr,dpr); // to scale every drawing operations
+
+    // constants for the behavior of the model - Optimized for performance
+    const sNumber = 200;              // number of Stars (reduced from 600)
+    const sSize = .3;                 // minimum size of Star
+    const sSizeR = .6;                // randomness of the size of Stars
+    const sAlphaR = .5;               // randomness of alpha for stars
+    const sMaxHueProportion = .6;     // max proportion of displayed base hue
+    // Shooting stars parameters
+    const shootingStarDensity = 0.005; // reduced from 0.01
+    const shootingStarBaseXspeed = 30;
+    const shootingStarBaseYspeed = 15;
+    const shootingStarBaseLength = 8;
+    const shootingStarBaseLifespan = 60;
+    // Shooting star colors
+    const shootingStarsColors = [
+      "#a1ffba", // greenish
+      "#a1d2ff", // blueish
+      "#fffaa1", // yellowish
+      "#ffa1a1"  // redish
+    ];
+    // milky way constants - Optimized
+    const mwStarCount = 30000;      // amount of static stars (reduced from 100000)
+    const mwRandomStarProp = .2;    // proportion of stars completely random in the milky way
+    const mwClusterCount = 150;     // amount of clusters (reduced from 300)
+    const mwClusterStarCount = 800; // amount of stars per cluster (reduced from 1500)
+    const mwClusterSize = 120;      // minimum size of a cluster
+    const mwClusterSizeR = 80;      // randomness of the size of a cluster
+    const mwClusterLayers = 10;     // amount of layers per cluster to draw
+    const mwAngle = 0.6;            // to incline the milky way (0 is horizontal, tend to infinite to get vertical)
+    const mwHueMin = 150;           // min hue for a cluster (150 is green)
+    const mwHueMax = 300;           // max hue for a cluster (300 is pink)
+    const mwWhiteProportionMin = 50;// minimum base percentage of white in cluster hue
+    const mwWhiteProportionMax = 65;// maximum base percentage of white in cluster hue
+
+    // array containing random numbers
+    let randomArray;
+    const randomArrayLength = 1000;
+    let randomArrayIterator = 0;
+    // array containing random hues
+    let hueArray;
+    const hueArrayLength = 1000;
+    // arrays containing all Stars
+    let StarsArray;
+    let ShootingStarsArray;
+
+    // Star creation
+    class Star{
+      constructor(x,y,size){
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.alpha = size / (sSize + sSizeR);
+        this.baseHue =  hueArray[Math.floor(Math.random()*hueArrayLength)];
+        this.baseHueProportion = Math.random();
+        this.randomIndexa = Math.floor(Math.random()*randomArrayLength);
+        this.randomIndexh = this.randomIndexa;
+        this.randomValue = randomArray[this.randomIndexa];
+      }
+      // method to draw each Star
+      draw(){
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2, false);
+        let rAlpha = this.alpha + Math.min((this.randomValue - 0.5) * sAlphaR, 1);    // random alpha for the shimmering
+        let rHue = randomArray[this.randomIndexh] > this.baseHueProportion ? hueArray[this.randomIndexa] : this.baseHue; // random hue or base hue
+        this.color = "hsla("+ rHue + ",100%,85%," + rAlpha + ")";
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+      // method to check position of Star
+      update(){
+        this.randomIndexh = this.randomIndexa;
+        this.randomIndexa = (this.randomIndexa >= 999) ? 0 : this.randomIndexa + 1 ;
+        this.randomValue = randomArray[this.randomIndexa];
+        // draw Star
+        this.draw();
+      }
+    }
+
+    // Shooting Star creation
+    class ShootingStar{
+      constructor(x,y,speedX,speedY,color){
+        this.x = x;
+        this.y = y;
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.framesLeft = shootingStarBaseLifespan;
+        this.color = color;
+      }
+
+      // method to know if the star will be dead on next draw
+      goingOut(){
+        return this.framesLeft <= 0 ;
+      }
+      // method to get the modifier based on the age of the shooting star
+      // when freshly born or close to die the length and brightness are reduced
+      ageModifier(){
+        let halfLife = shootingStarBaseLifespan/2.0;
+        return Math.pow(1.0-Math.abs(this.framesLeft-halfLife)/halfLife,2);
+      }
+
+      // method to draw each Star
+      draw(){
+        let am = this.ageModifier();
+        let endX = this.x - this.speedX*shootingStarBaseLength*am;
+        let endY = this.y - this.speedY*shootingStarBaseLength*am;
+        // linear gradient for the color of the shooting star
+        let gradient = ctx.createLinearGradient(this.x,this.y,endX,endY);
+        gradient.addColorStop(0, "#fff");         // brigth a the start
+        gradient.addColorStop(Math.min(am,.7), this.color);     // colored in the middle
+        gradient.addColorStop(1, "rgba(0,0,0,0)");// dim a the end
+
+        // drawing
+        ctx.strokeStyle = gradient;
+        ctx.beginPath();
+        ctx.moveTo(this.x,this.y);
+        ctx.lineTo(endX,endY);
+        ctx.stroke();
+      }
+      // method to check position of Star
+      update(){
+        this.framesLeft--;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        // draw Star
+        this.draw();
+      }
+    }
+
+    // star cluster in the milky way
+    class MwStarCluster{
+      constructor(x, y, size, hue, baseWhiteProportion, brigthnessModifier){
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.hue = hue;
+        this.baseWhiteProportion = baseWhiteProportion;
+        this.brigthnessModifier = brigthnessModifier;
+      }
+
+      draw(){
+        let starsPerLayer = Math.floor(mwClusterStarCount/mwClusterLayers);
+        for(let layer = 1; layer < mwClusterLayers; layer++){
+          let layerRadius = this.size*layer/mwClusterLayers;
+          for(let i = 1; i < starsPerLayer; i++){
+            let posX = this.x + 2*layerRadius*(Math.random()-.5);
+            let posY = this.y + 2*Math.sqrt(Math.pow(layerRadius,2)-Math.pow(this.x-posX,2))*(Math.random()-.5);
+            let size = .05 + Math.random()*.15;
+            let alpha = .3 + Math.random()*.4;
+            let whitePercentage = this.baseWhiteProportion + 15 + 15*this.brigthnessModifier + Math.floor(Math.random()*10);
+            ctxMw.beginPath();
+            ctxMw.arc(posX, posY, size, 0, Math.PI*2, false);
+            ctxMw.fillStyle = "hsla(" + this.hue +  ",100%," + whitePercentage + "%," + alpha + ")";  // 290 deg is pinkish color
+            ctxMw.fill();
+          }
+        }
+        // adding an extra gradient
+        let gradient = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.size);
+        gradient.addColorStop(0, "hsla(" + this.hue +  ",100%," + this.baseWhiteProportion + "%,0.002)");         // dim center
+        gradient.addColorStop(0.25, "hsla(" + this.hue +  ",100%," + (this.baseWhiteProportion + 30) + "%,"+ (0.01+0.01*this.brigthnessModifier) + ")");         // brigth around center
+        gradient.addColorStop(0.4, "hsla(" + this.hue +  ",100%," + (this.baseWhiteProportion + 15) + "%,0.005)");     // colored in the middle
+        gradient.addColorStop(1, "rgba(0,0,0,0)");// dim a the end
+        ctxMw.beginPath();
+        ctxMw.arc(this.x,this.y,this.size, 0, Math.PI*2, false);
+        ctxMw.fillStyle = gradient;
+        ctxMw.fill();
+      }
+    }
+
+    // create Star array, positions are randomized
+    function init(){
+      // init random array
+      randomArray = [];
+      for(let i = 0; i < randomArrayLength ; i++){
+        randomArray[i] = Math.random();
+      }
+      // init hueArray
+      hueArray = [];
+      for(let i = 0; i < hueArrayLength ; i++){
+        // Determining a star hue, ranges from 0 to 60 then 170 to 270 (basically all but green and pink)
+        let rHue = Math.floor(Math.random()*160); // usually hue ranges from 0 to 360 but using only 0 to 160 because of next line
+        if(rHue > 60) rHue += 110; // to avoid greenish looking stars (hue from 60 to 170), feels unnatural
+        hueArray[i] = rHue;
+      }
+
+      StarsArray = [];
+      for(let i = 0; i < sNumber ; i++){
+        let size = (Math.random() * sSizeR) + sSize;
+        let x = Math.random() * ((innerWidth - size *2 ) - (size * 2)) + size * 2;
+        let y = Math.random() * ((innerHeight - size *2 ) - (size * 2)) + size * 2;
+
+        StarsArray.push(new Star(x, y, size));
+      }
+
+      ShootingStarsArray = [];
+
+      DrawMilkyWayCanvas();
+    }
+
+    // animation
+    function animate(){
+      requestAnimationFrame(animate);
+
+      ctx.clearRect(0,0,innerWidth, innerHeight);
+
+      for(let i = 0; i < StarsArray.length; i++){
+        StarsArray[i].update();
+      }
+
+      // pushing a new shooting star randomly
+      if(randomArray[randomArrayIterator] < shootingStarDensity){
+        let posX = Math.floor(Math.random()*canvas.width);  // will appear anywhere from left to right
+        let posY = Math.floor(Math.random()*150); // will appear anywhere from top to 150px from top
+        let speedX = Math.floor((Math.random()-.5)*shootingStarBaseXspeed); // will go anywhere left or right
+        let speedY = Math.floor(Math.random()*shootingStarBaseYspeed); // will go down
+        let color = shootingStarsColors[Math.floor(Math.random()*shootingStarsColors.length)];
+        ShootingStarsArray.push(new ShootingStar(posX,posY,speedX,speedY,color));
+      }
+
+      // removing out of frame or dead shooting stars
+      let arrayIterator = ShootingStarsArray.length - 1;
+      while(arrayIterator >= 0){
+        if(ShootingStarsArray[arrayIterator].goingOut() == true){
+          ShootingStarsArray.splice(arrayIterator, 1);
+        }
+        else{
+          ShootingStarsArray[arrayIterator].update();
+        }
+        arrayIterator--;
+      }
+
+      // moving through random array
+      if(randomArrayIterator + 1 >= randomArrayLength){
+        randomArrayIterator = 0;
+      }
+      else{
+        randomArrayIterator++;
+      }
+    }
+
+    // to get x position of a star or cluster in the milky way
+    function MilkyWayX(){
+      return Math.floor(Math.random()*innerWidth);
+    }
+
+    // to get y position of a star or cluster in the milky way depending on x position
+    function MilkyWayYFromX(xPos, mode){
+      let offset = ((innerWidth/2)-xPos)*mwAngle;
+      if(mode == "star"){
+        return Math.floor(Math.pow(Math.random(),1.2)*innerHeight*(Math.random()-.5) + innerHeight/2 + (Math.random()-.5)*100) + offset;
+      }
+      else{
+        return Math.floor(Math.pow(Math.random(),1.5)*innerHeight*.6*(Math.random()-.5) + innerHeight/2 + (Math.random()-.5)*100) + offset;
+      }
+    }
+
+    // To draw the milkyWay
+    function DrawMilkyWayCanvas(){
+      // at first we draw unclustered stars
+      for(let i = 0; i < mwStarCount; i++){
+        ctxMw.beginPath();
+        let xPos = MilkyWayX();
+        let yPos = Math.random() < mwRandomStarProp ? Math.floor(Math.random()*innerHeight) : MilkyWayYFromX(xPos, "star");
+        let size = Math.random()*.27;
+        ctxMw.arc(xPos, yPos, size, 0, Math.PI*2, false);
+        let alpha = .4 + Math.random()*.6;
+        ctxMw.fillStyle = "hsla(0,100%,100%," + alpha + ")";
+        ctxMw.fill();
+      }
+      // now we draw clusters
+      for(let i = 0; i < mwClusterCount; i++){
+        let xPos = MilkyWayX();
+        let yPos = MilkyWayYFromX(xPos, "cluster");
+        // modifier using position of the cluster, a value of 1 is at the center, 0 is on the side
+        let distToCenter = (1-(Math.abs(xPos - innerWidth/2)/(innerWidth/2)))*(1-(Math.abs(yPos - innerHeight/2)/(innerHeight/2)));
+        let size = mwClusterSize + Math.random()*mwClusterSizeR;
+        // the hue is not the same depending on how close the cluster is to the center, half of the modifier value depends on it
+        let hue = mwHueMin + Math.floor((Math.random()*.5 + distToCenter*.5)*(mwHueMax - mwHueMin));
+        let baseWhiteProportion = mwWhiteProportionMin + Math.random()*(mwWhiteProportionMax - mwWhiteProportionMin);
+        new MwStarCluster(xPos, yPos, size, hue, baseWhiteProportion, distToCenter).draw();
+      }
+    }
+
+    // now we play
+    init();
+    animate();
+    </script>
+</body>
+</html>
